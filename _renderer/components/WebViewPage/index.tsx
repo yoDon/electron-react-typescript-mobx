@@ -18,14 +18,14 @@ class WebViewPage extends React.Component {
               <button
                 className="btn btn.main"
                 style={{ margin:"15px", backgroundColor:"coral" }}
-                onClick={this.openDevTools.bind(this)}
+                onClick={this.openDevTools}
               >
                 Open inner dev tools
               </button>
               <button
                 className="btn btn.main"
                 style={{ margin:"15px", backgroundColor:"coral" }}
-                onClick={this.innerBack.bind(this)}
+                onClick={this.innerBack}
               >
                 Inner back back button
               </button>
@@ -46,11 +46,11 @@ class WebViewPage extends React.Component {
     );
   }
 
-  private openDevTools() {
+  private openDevTools = () => {
     (document.getElementsByClassName(styles.webView) as any)[0].openDevTools();
   }
 
-  private innerBack() {
+  private innerBack = () => {
     if ((document.getElementsByClassName(styles.webView) as any)[0].canGoBack()) {
       (document.getElementsByClassName(styles.webView) as any)[0].goBack();
     }

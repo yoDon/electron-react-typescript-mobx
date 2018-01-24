@@ -23,11 +23,11 @@ class CounterPage extends React.Component<{appState:StoreRoot}, {}> {
           {this.props.appState.counter.hasElectronAccess ? "C# Value" : "JS Value"}
         </div>
         <div className={styles.btnGroup}>
-          <button className={styles.btn} onClick={this.increment.bind(this)}>
+          <button className={styles.btn} onClick={this.increment}>
             <i className="fa fa-plus" />
           </button>
           <br/>
-          <button className={styles.btn} onClick={this.decrement.bind(this)}>
+          <button className={styles.btn} onClick={this.decrement}>
             <i className="fa fa-minus" />
           </button>
         </div>
@@ -35,11 +35,11 @@ class CounterPage extends React.Component<{appState:StoreRoot}, {}> {
     );
   }
 
-  private increment() {
+  private increment = () => {
     this.props.appState.counter.increment();
   }
 
-  private decrement() {
+  private decrement = () => {
     this.props.appState.counter.decrement();
   }
 

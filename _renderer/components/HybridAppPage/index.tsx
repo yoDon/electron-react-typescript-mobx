@@ -98,28 +98,28 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
           <button
             className="btn btn.main"
             style={{ margin:"15px", backgroundColor:"coral" }}
-            onClick={this.openDevTools.bind(this)}
+            onClick={this.openDevTools}
           >
             Open inner dev tools
           </button>
           <button
             className="btn btn.main"
             style={{ margin:"15px", backgroundColor:"coral" }}
-            onClick={this.innerBack.bind(this)}
+            onClick={this.innerBack}
           >
            Inner back back button
           </button>
           <button
             className="btn btn.main"
             style={{ margin:"15px", backgroundColor:"coral" }}
-            onClick={this.plus.bind(this)}
+            onClick={this.plus}
           >
             Plus
           </button>
           <button
             className="btn btn.main"
             style={{ margin:"15px", backgroundColor:"coral" }}
-            onClick={this.minus.bind(this)}
+            onClick={this.minus.bind}
           >
             Minus
           </button>
@@ -128,25 +128,25 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
     );
   }
 
-  private getWebView() {
+  private getWebView = () => {
     return (document.getElementsByClassName(styles.webView) as any)[0];
   }
 
-  private openDevTools() {
+  private openDevTools = () => {
     this.mElement.openDevTools();
   }
 
-  private innerBack() {
+  private innerBack = () => {
     if (this.mElement.canGoBack()) {
       this.mElement.goBack();
     }
   }
 
-  private plus() {
+  private plus = () => {
     this.props.appState.counter.increment();
   }
 
-  private minus() {
+  private minus = () => {
     this.props.appState.counter.decrement();
   }
 
