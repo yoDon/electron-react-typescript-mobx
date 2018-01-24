@@ -4,6 +4,10 @@ const minimist = require('minimist');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+// see https://medium.com/@ad_harmonium/build-to-both-electron-js-and-browser-targets-using-webpack-59266bdb76a
+// see https://github.com/eaTong/electron-mobx/blob/master/webpack.production.config.js 
+// see https://github.com/TBoileau/electron-react-mobx-boilerplate
+
 var argv = minimist(process.argv.slice(2));
 const isWeb = (argv && argv.target === 'web');
 const target = (isWeb ? 'web' : 'electron-renderer');
@@ -23,7 +27,6 @@ const htmlWebpackPlugin = (isWeb ?
 );
 
 module.exports = {
-    devtool: "source-map",
     entry: [
         entryTsx
     ],
@@ -32,18 +35,15 @@ module.exports = {
         filename: "[name].js",
         path: path.resolve(__dirname, 'dist'),
     },
-    devServer: {
-        contentBase: path.join(__dirname, "dist"),
-        open: true,
-        host: 'localhost',
-        port: 3000,
-        historyApiFallback: true,
-        hot: true,
-    },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+              'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         htmlWebpackPlugin
     ],
     resolve: {

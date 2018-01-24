@@ -1,0 +1,26 @@
+{
+  "extends": ["tslint-config-standard","tslint:latest", "tslint-react"],
+  "rules": {
+    "indent": [true, "spaces"],
+    "max-line-length": false,
+    "space-before-function-paren": false,
+    "ter-indent": [true, 2],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      },
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ]
+  }
+}

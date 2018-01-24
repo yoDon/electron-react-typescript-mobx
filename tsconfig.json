@@ -1,27 +1,23 @@
 {
+    "compileOnSave": true,
     "compilerOptions": {
         "outDir": "./dist/",
         "moduleResolution": "node",
+        "pretty": true,
+        "newLine": "LF",
+        "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "module": "commonjs",
         "target": "es5",
         "jsx": "react",
         "allowJs": false,
+        "strict": true,
         "alwaysStrict": true,
         "strictNullChecks": false,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "noUnusedLocals": true,
-        "experimentalDecorators": true
-    },
-    "include": [
-        "_shared/**/*.ts",
-        "_shared/**/*.tsx",
-        "_site/**/*.ts",
-        "_site/**/*.tsx",
-        "_src/**/*.ts",
-        "_src/**/*.tsx",
-        "node_modules/@types/**/*.d.ts"
-    ]
+        "experimentalDecorators": true,
+    }
 }
