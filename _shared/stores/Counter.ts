@@ -66,7 +66,7 @@ class CounterStore {
         //       from the webview can be inspected and approved by this electron
         //       renderer process before passing them on to the electron backend
         //       process. It"s important that untrusted websites and web content
-        //       not be granted full access to the electron API in order to 
+        //       not be granted full access to the electron API in order to
         //       protect the user"s PC from potentially malicious web content.
         //
         this.mElement.addEventListener("ipc-message", (event:any) => {

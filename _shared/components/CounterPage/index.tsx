@@ -7,7 +7,7 @@ import * as styles from "./styles.scss";
 
 @inject("appState")
 @observer
-class CounterPage extends React.Component<{appState: StoreRoot}, {}> {
+class CounterPage extends React.Component<{appState:StoreRoot}, {}> {
 
   private increment() {
     this.props.appState.counter.increment();
