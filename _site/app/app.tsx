@@ -22,5 +22,5 @@ ReactDOM.render(
             </div>
         </HashRouter>
     </Provider>,
-    document.getElementById("Content")
-)
+    document.getElementById("Content"),
+);

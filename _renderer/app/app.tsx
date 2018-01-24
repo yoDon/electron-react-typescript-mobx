@@ -1,13 +1,13 @@
-﻿import * as React from "react";
+﻿import { useStrict } from "mobx";
+import { Provider } from "mobx-react";
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { HashRouter, Route } from "react-router-dom";
-import { Provider } from "mobx-react";
-import { useStrict } from 'mobx'
+import CounterPage from "../../_shared/components/CounterPage";
+import StoreRoot from "../../_shared/stores/StoreRoot";
 import HomePage from "../components/HomePage";
 import HybridAppPage from "../components/HybridAppPage";
 import WebViewPage from "../components/WebViewPage";
-import CounterPage from "../../_shared/components/CounterPage";
-import StoreRoot from "../../_shared/stores/StoreRoot";
 
 import "./app.global.scss";
 
@@ -19,12 +19,12 @@ ReactDOM.render(
     <Provider appState={stores}>
         <HashRouter>
             <div>
-                <Route exact path="/counter" component={CounterPage} />
-                <Route exact path="/webview" component={WebViewPage} />
-                <Route exact path="/hybrid" component={HybridAppPage} />
-                <Route exact path="/" component={HomePage} />
+                <Route exact={true} path="/counter" component={CounterPage} />
+                <Route exact={true} path="/webview" component={WebViewPage} />
+                <Route exact={true} path="/hybrid" component={HybridAppPage} />
+                <Route exact={true} path="/" component={HomePage} />
             </div>
         </HashRouter>
     </Provider>,
-    document.getElementById('Content')
+    document.getElementById("Content"),
 );
