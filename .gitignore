@@ -263,3 +263,9 @@ wwwroot/index.html
 wwwroot/bundle.js
 wwwsite/bundle.js
 wwwsite/index.html
+dist/site.js.map
+dist/site.js
+dist/index.html
+dist/electron.js.map
+dist/electron.js
+dist/electron.html
