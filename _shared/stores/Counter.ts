@@ -101,7 +101,7 @@ class CounterStore {
             // manage the state locally without talking to the Electron backend,
             // because there is no backend to talk to
             //
-            this.value++;
+            this.value += value;
         }
     }
 
