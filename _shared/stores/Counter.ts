@@ -16,24 +16,24 @@ class CounterStore {
   public isElectron:boolean = (window as any).isElectron;
   public isInHybridWebView:boolean = ((window as any).isElectron === false && ipcRenderer !== undefined && ipcRenderer !== null);
   public hasElectronAccess:boolean = (ipcRenderer !== undefined && ipcRenderer !== null);
-  @observable value = 0;
-  private mDisposers = [] as (()=>void)[];
+  @observable public value = 0;
+  private mDisposers = [] as Array<() => void>;
   private mElement = null as any;
 
   constructor() {
     if (this.isElectron) {
-      ipcRenderer.on("counter-delta-reply",(event:any, arg:number) => {
+      ipcRenderer.on("counter-delta-reply", (event:any, arg:number) => {
         this.setReply(arg);
       });
-      ipcRenderer.on("open-dev-tools-webview-reply",(event:any, arg:string) => {
+      ipcRenderer.on("open-dev-tools-webview-reply", (event:any, arg:string) => {
         this.openDevToolsWebView();
       });
-      ipcRenderer.on("browser-back-webview-reply",(event:any, arg:string) => {
+      ipcRenderer.on("browser-back-webview-reply", (event:any, arg:string) => {
         this.browserBackWebView();
       });
       ipcRenderer.send("menu-for-webview");
     } else if (this.isInHybridWebView) {
-      ipcRenderer.on("webview-counter-delta-reply",(event:any, arg:number) => {
+      ipcRenderer.on("webview-counter-delta-reply", (event:any, arg:number) => {
         this.setReply(arg);
       });
     } else {
@@ -91,7 +91,7 @@ class CounterStore {
     }
   }
 
-  @action change(value:number) {
+  @action public change(value:number) {
     if (this.isElectron) {
       ipcRenderer.send("counter-delta", { delta:value });
     } else if (this.isInHybridWebView) {
@@ -105,15 +105,15 @@ class CounterStore {
     }
   }
 
-  @action increment() {
-    this.change(1)
+  @action public increment() {
+    this.change(1);
   }
 
-  @action decrement() {
+  @action public decrement() {
     this.change(-1);
   }
 
-  @action setReply(arg:number) {
+  @action public setReply(arg:number) {
     this.value = arg;
   }
 
@@ -125,7 +125,7 @@ class CounterStore {
 
   public browserBackWebView() {
     if (this.mElement) {
-      if (this.mElement.canGoBack()) { 
+      if (this.mElement.canGoBack()) {
         this.mElement.goBack();
       }
     }

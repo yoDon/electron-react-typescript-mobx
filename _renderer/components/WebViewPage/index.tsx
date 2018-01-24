@@ -11,7 +11,7 @@ class WebViewPage extends React.Component {
   }
 
   private innerBack() {
-    if ((document.getElementsByClassName(styles.webView) as any)[0].canGoBack()) { 
+    if ((document.getElementsByClassName(styles.webView) as any)[0].canGoBack()) {
       (document.getElementsByClassName(styles.webView) as any)[0].goBack();
     }
   }
@@ -22,19 +22,19 @@ class WebViewPage extends React.Component {
         <div>
           <ElectronWebView src="http://github.com" className={styles.webView} />
             <div className={styles.backButton}>
-              <Link to="/" style={{marginRight:"60px"}}>
+              <Link to="/" style={{ marginRight:"60px" }}>
                 <i className="fa fa-arrow-left fa-3x"/>
               </Link>
               <button 
-                className="btn btn.main" 
-                style={{margin:"15px", backgroundColor:"coral"}} 
+                className="btn btn.main"
+                style={{ margin:"15px", backgroundColor:"coral" }}
                 onClick={this.openDevTools.bind(this)}
               >
                 Open inner dev tools
               </button>
               <button 
-                className="btn btn.main" 
-                style={{margin:"15px", backgroundColor:"coral"}} 
+                className="btn btn.main"
+                style={{ margin:"15px", backgroundColor:"coral"}}
                 onClick={this.innerBack.bind(this)}
               >
                 Inner back back button
@@ -53,7 +53,7 @@ class WebViewPage extends React.Component {
           </Link>
         </div>
       </div>
-   );
+    );
   }
 }
 

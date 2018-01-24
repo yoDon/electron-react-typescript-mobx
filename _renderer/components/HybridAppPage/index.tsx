@@ -22,13 +22,13 @@ import * as styles from "./styles.scss";
 //       (Fortunately after the first time this normally only needs to be repeated
 //        if you need to change preload.js, which should be a fairly rare occurance)
 //
-const preloadScript = ((window as any).isElectron === false) ? "" : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath()+"/../app/bin/Assets/preload.js"}`;
+const preloadScript = ((window as any).isElectron === false) ? "" : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/../app/bin/Assets/preload.js"}`;
 
 //
 // Note: you can set the WebView src attribute to ./index.html to just load this
 //       app into itself as a WebView (handy for testing if stuff works) or to
-//       "https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample" 
-//       to pull in a built version of the sample _site in this example code 
+//       "https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample"
+//       to pull in a built version of the sample _site in this example code
 //       (but that page might not be entirely up to date with the main repo
 //       since we don"t currently have any automated build hooks to make sure
 //       they are in sync)
@@ -60,7 +60,7 @@ class HybridAppPage extends React.Component<{appState: StoreRoot}, {}> {
   }
 
   private innerBack() {
-    if (this.mElement.canGoBack()) { 
+    if (this.mElement.canGoBack()) {
       this.mElement.goBack();
     }
   }
@@ -89,15 +89,15 @@ class HybridAppPage extends React.Component<{appState: StoreRoot}, {}> {
     }
     return (
       <div>
-        <ElectronWebView 
+        <ElectronWebView
           src={electronWebViewSrc}
           preload={preloadScript}
           className={styles.webView}
         />
-        <div style={{margin:"15px"}}>
+        <div style={{ margin:"15px" }}>
           Counter: <b>{this.props.appState.counter.value}</b>
         </div>
-        <div style={{margin:"15px"}}>
+        <div style={{ margin:"15px" }}>
           VERY IMPORTANT for now you need to manually copy the ./Assets folder into
           a couple of nested node_modules locations after building for the first time,
           as described in the repo readme. If you forgot to do that, you"ll either
@@ -107,33 +107,33 @@ class HybridAppPage extends React.Component<{appState: StoreRoot}, {}> {
           both of which are because it didn"t receive the electron access it needs
           (see the next section for more info).
         </div>
-        <div style={{margin:"15px"}}>
+        <div style={{ margin:"15px" }}>
           You can also load the contained page (https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample)
           in your browser where it does not have access to the Electron API. In that case the
           contained code will use "local state" maintained in JS rather than "electron state"
           maintained by C#
         </div>
         <div className={styles.backButton}>
-          <Link to="/" style={{marginRight:"60px"}}>
+          <Link to="/" style={{ marginRight:"60px" }}>
             <i className="fa fa-arrow-left fa-3x"/>
           </Link>
           <button
-            className="btn btn.main" 
-            style={{margin:"15px", backgroundColor:"coral"}}
+            className="btn btn.main"
+            style={{ margin:"15px", backgroundColor:"coral" }}
             onClick={this.openDevTools.bind(this)}
           >
             Open inner dev tools
           </button>
           <button
             className="btn btn.main"
-            style={{margin:"15px", backgroundColor:"coral"}}
+            style={{ margin:"15px", backgroundColor:"coral" }}
             onClick={this.innerBack.bind(this)}
           >
            Inner back back button
           </button>
           <button
             className="btn btn.main"
-            style={{margin:"15px", backgroundColor:"coral"}}
+            style={{ margin:"15px", backgroundColor:"coral" }}
             onClick={this.plus.bind(this)}
           >
             Plus
