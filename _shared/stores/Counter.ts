@@ -55,42 +55,6 @@ class CounterStore {
     }
   }
 
-  private registerWebView_Impl(element:any) {
-    if (this.isElectron) {
-      this.mElement = element;
-      if (this.mElement.getAttribute("webviewlistener") !== "true") {
-        this.mElement.setAttribute("webviewlistener", "true");
-        //
-        // NOTE: By convention this app only allows loaded pages to register
-        //       and call routes starting with "webview-", so that all messages
-        //       from the webview can be inspected and approved by this electron
-        //       renderer process before passing them on to the electron backend
-        //       process. It"s important that untrusted websites and web content
-        //       not be granted full access to the electron API in order to
-        //       protect the user"s PC from potentially malicious web content.
-        //
-        this.mElement.addEventListener("ipc-message", (event:any) => {
-          const key = event.channel as string;
-          switch (key) {
-          case "webview-counter-delta": this.change(event.args[0].delta as number); break;
-          }
-        });
-        //
-        // Relay state updates to the webview
-        //
-        this.mDisposers.push(autorun(() => {
-          this.mElement.send("webview-counter-delta-reply", this.value);
-        }));
-        //
-        // Initialize
-        //
-        this.mElement.send("webview-counter-delta-reply", this.value);
-        // Uncomment next line to automatically open the devTools window after the content loads
-        // element.openDevTools();
-      }
-    }
-  }
-
   @action public change(value:number) {
     if (this.isElectron) {
       ipcRenderer.send("counter-delta", { delta:value });
@@ -127,6 +91,42 @@ class CounterStore {
     if (this.mElement) {
       if (this.mElement.canGoBack()) {
         this.mElement.goBack();
+      }
+    }
+  }
+
+  private registerWebView_Impl(element:any) {
+    if (this.isElectron) {
+      this.mElement = element;
+      if (this.mElement.getAttribute("webviewlistener") !== "true") {
+        this.mElement.setAttribute("webviewlistener", "true");
+        //
+        // NOTE: By convention this app only allows loaded pages to register
+        //       and call routes starting with "webview-", so that all messages
+        //       from the webview can be inspected and approved by this electron
+        //       renderer process before passing them on to the electron backend
+        //       process. It"s important that untrusted websites and web content
+        //       not be granted full access to the electron API in order to
+        //       protect the user"s PC from potentially malicious web content.
+        //
+        this.mElement.addEventListener("ipc-message", (event:any) => {
+          const key = event.channel as string;
+          switch (key) {
+          case "webview-counter-delta": this.change(event.args[0].delta as number); break;
+          }
+        });
+        //
+        // Relay state updates to the webview
+        //
+        this.mDisposers.push(autorun(() => {
+          this.mElement.send("webview-counter-delta-reply", this.value);
+        }));
+        //
+        // Initialize
+        //
+        this.mElement.send("webview-counter-delta-reply", this.value);
+        // Uncomment next line to automatically open the devTools window after the content loads
+        // element.openDevTools();
       }
     }
   }

@@ -6,16 +6,6 @@ import * as styles from "./styles.scss";
 
 class WebViewPage extends React.Component {
 
-  private openDevTools() {
-    (document.getElementsByClassName(styles.webView) as any)[0].openDevTools();
-  }
-
-  private innerBack() {
-    if ((document.getElementsByClassName(styles.webView) as any)[0].canGoBack()) {
-      (document.getElementsByClassName(styles.webView) as any)[0].goBack();
-    }
-  }
-
   public render() {
     if ((window as any).isElectron) {
       return (
@@ -25,16 +15,16 @@ class WebViewPage extends React.Component {
               <Link to="/" style={{ marginRight:"60px" }}>
                 <i className="fa fa-arrow-left fa-3x"/>
               </Link>
-              <button 
+              <button
                 className="btn btn.main"
                 style={{ margin:"15px", backgroundColor:"coral" }}
                 onClick={this.openDevTools.bind(this)}
               >
                 Open inner dev tools
               </button>
-              <button 
+              <button
                 className="btn btn.main"
-                style={{ margin:"15px", backgroundColor:"coral"}}
+                style={{ margin:"15px", backgroundColor:"coral" }}
                 onClick={this.innerBack.bind(this)}
               >
                 Inner back back button
@@ -55,6 +45,17 @@ class WebViewPage extends React.Component {
       </div>
     );
   }
+
+  private openDevTools() {
+    (document.getElementsByClassName(styles.webView) as any)[0].openDevTools();
+  }
+
+  private innerBack() {
+    if ((document.getElementsByClassName(styles.webView) as any)[0].canGoBack()) {
+      (document.getElementsByClassName(styles.webView) as any)[0].goBack();
+    }
+  }
+
 }
 
 export default WebViewPage;

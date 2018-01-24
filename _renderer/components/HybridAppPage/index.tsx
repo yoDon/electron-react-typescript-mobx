@@ -38,13 +38,9 @@ const electronWebViewSrc = "./index.html";
 
 @inject("appState")
 @observer
-class HybridAppPage extends React.Component<{appState: StoreRoot}, {}> {
+class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
 
   private mElement:any;
-
-  private getWebView() {
-    return (document.getElementsByClassName(styles.webView) as any)[0];
-  }
 
   public componentDidMount() {
     this.mElement = this.getWebView();
@@ -53,24 +49,6 @@ class HybridAppPage extends React.Component<{appState: StoreRoot}, {}> {
 
   public componentWillUnmount() {
     this.props.appState.counter.unregisterWebView(this.mElement);
-  }
-
-  private openDevTools() {
-    this.mElement.openDevTools();
-  }
-
-  private innerBack() {
-    if (this.mElement.canGoBack()) {
-      this.mElement.goBack();
-    }
-  }
-
-  private plus() {
-    this.props.appState.counter.increment();
-  }
-
-  private minus() {
-    this.props.appState.counter.decrement();
   }
 
   public render() {
@@ -140,7 +118,7 @@ class HybridAppPage extends React.Component<{appState: StoreRoot}, {}> {
           </button>
           <button
             className="btn btn.main"
-            style={{margin:"15px", backgroundColor:"coral"}}
+            style={{ margin:"15px", backgroundColor:"coral" }}
             onClick={this.minus.bind(this)}
           >
             Minus
@@ -149,6 +127,29 @@ class HybridAppPage extends React.Component<{appState: StoreRoot}, {}> {
       </div>
     );
   }
+
+  private getWebView() {
+    return (document.getElementsByClassName(styles.webView) as any)[0];
+  }
+
+  private openDevTools() {
+    this.mElement.openDevTools();
+  }
+
+  private innerBack() {
+    if (this.mElement.canGoBack()) {
+      this.mElement.goBack();
+    }
+  }
+
+  private plus() {
+    this.props.appState.counter.increment();
+  }
+
+  private minus() {
+    this.props.appState.counter.decrement();
+  }
+
 }
 
 export default HybridAppPage;

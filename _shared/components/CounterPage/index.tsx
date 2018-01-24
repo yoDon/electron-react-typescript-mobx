@@ -9,14 +9,6 @@ import * as styles from "./styles.scss";
 @observer
 class CounterPage extends React.Component<{appState:StoreRoot}, {}> {
 
-  private increment() {
-    this.props.appState.counter.increment();
-  }
-
-  private decrement() {
-    this.props.appState.counter.decrement();
-  }
-
   public render() {
     return (
       <div>
@@ -42,6 +34,15 @@ class CounterPage extends React.Component<{appState:StoreRoot}, {}> {
       </div>
     );
   }
+
+  private increment() {
+    this.props.appState.counter.increment();
+  }
+
+  private decrement() {
+    this.props.appState.counter.decrement();
+  }
+
 }
 
 export default CounterPage;
