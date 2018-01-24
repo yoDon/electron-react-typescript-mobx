@@ -1,0 +1,2 @@
+[ ] find all export default's and convert to export default
+[ ] move duplicate scss declarations from */styles.scss, move to appGlobal and scss import
