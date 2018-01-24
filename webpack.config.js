@@ -11,7 +11,7 @@ const target = (isWeb ? 'web' : 'electron-renderer');
 // 'react-hot-loader/patch',
 // 'webpack-dev-server/client?http://localhost:3000',
 // 'webpack/hot/only-dev-server',
-const entry = (isWeb ? { site: "./_site/app/app.tsx" } : { electron: "./_src/app/app.tsx" } );
+const entry = (isWeb ? { site: "./_site/app/app.tsx" } : { electron: "./_electron/app/app.tsx" } );
 const htmlWebpackPlugin = (isWeb ? 
     new HtmlWebpackPlugin({
         filename: 'index.html',
@@ -21,7 +21,7 @@ const htmlWebpackPlugin = (isWeb ?
     :
     new HtmlWebpackPlugin({
         filename: 'electron.html',
-        template: '_src/app/electron.html',
+        template: '_electron/app/electron.html',
         inject: false
     })
 );
