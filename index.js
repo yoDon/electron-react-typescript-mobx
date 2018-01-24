@@ -32,7 +32,7 @@ function createWindow() {
     //delay 1000ms to wait for webpack-dev-server start
     setTimeout(function(){
       win.loadURL(url.format({
-        pathname: "localhost:3000/index-electron.html",
+        pathname: "localhost:3000/electron.html",
         protocol: 'http:',
         slashes: true
       }));
@@ -40,7 +40,7 @@ function createWindow() {
     },1000);
   } else {
     win.loadURL(url.format({
-      pathname: path.join(path.resolve(__dirname, './dist'), 'index-electron.html'),
+      pathname: path.join(path.resolve(__dirname, './dist'), 'electron.html'),
       protocol: 'file:',
       slashes: true
     }));

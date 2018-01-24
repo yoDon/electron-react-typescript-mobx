@@ -7,7 +7,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 var argv = minimist(process.argv.slice(2));
 const isWeb = (argv && argv.target === 'web');
 const target = (isWeb ? 'web' : 'electron-renderer');
-const entryTsx = (isWeb ? { site: "./_site/app/app.tsx" } : { electron: "./_src/app/app.tsx" } );
+// DONTODO add to entry:
+// 'react-hot-loader/patch',
+// 'webpack-dev-server/client?http://localhost:3000',
+// 'webpack/hot/only-dev-server',
+const entry = (isWeb ? { site: "./_site/app/app.tsx" } : { electron: "./_src/app/app.tsx" } );
 const htmlWebpackPlugin = (isWeb ? 
     new HtmlWebpackPlugin({
         filename: 'index.html',
@@ -16,17 +20,15 @@ const htmlWebpackPlugin = (isWeb ?
     })
     :
     new HtmlWebpackPlugin({
-        filename: 'index-electron.html',
-        template: '_src/app/index-electron.html',
+        filename: 'electron.html',
+        template: '_src/app/electron.html',
         inject: false
     })
 );
 
 module.exports = {
     devtool: "source-map",
-    entry: [
-        entryTsx
-    ],
+    entry: entry,
     target: target,
     output: {
         filename: "[name].js",
