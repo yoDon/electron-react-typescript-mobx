@@ -68,7 +68,7 @@ module.exports = {
                 loader: "source-map-loader" 
             },
             {
-                test: /\.tsNOT$/,
+                test: /\.ts$/,
                 enforce: 'pre',
                 loader: 'tslint-loader',
                 options: {
