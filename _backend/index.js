@@ -25,6 +25,7 @@ app.on('ready', () => {
 })
 
 function createWindow() {
+  // { width: 1024, height: 728 }
   const {width, height} = electron.screen.getPrimaryDisplay().workAreaSize;
   const win = new BrowserWindow({width, height});
   
@@ -46,9 +47,3 @@ function createWindow() {
     }));
   }
 }
-
-//  mainWindow = new BrowserWindow({ width: 1024, height: 728 });
-//  mainWindow.loadURL(`file://${__dirname}/wwwroot/index.html`);
-//  mainWindow.on('closed', () => {
-//    mainWindow = null;
-//  });

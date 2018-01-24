@@ -11,7 +11,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 var argv = minimist(process.argv.slice(2));
 const isWeb = (argv && argv.target === 'web');
 const target = (isWeb ? 'web' : 'electron-renderer');
-const entry = (isWeb ? { site: "./_site/app/app.tsx" } : { electron: "./_electron/app/app.tsx" } );
+const entry = (isWeb ? { site: "./_site/app/app.tsx" } : { electron: "./_renderer/app/app.tsx" } );
 const htmlWebpackPlugin = (isWeb ? 
     new HtmlWebpackPlugin({
         filename: 'index.html',
@@ -21,7 +21,7 @@ const htmlWebpackPlugin = (isWeb ?
     :
     new HtmlWebpackPlugin({
         filename: 'electron.html',
-        template: '_electron/app/electron.html',
+        template: '_renderer/app/electron.html',
         inject: false
     })
 );
