@@ -1,5 +1,9 @@
 {
-  "extends": ["tslint-config-standard","tslint:latest", "tslint-react"],
+  "extends": [
+    "tslint-config-standard",
+    "tslint:latest", 
+    "tslint-react"
+  ],
   "rules": {
     "indent": [true, "spaces"],
     "max-line-length": false,
