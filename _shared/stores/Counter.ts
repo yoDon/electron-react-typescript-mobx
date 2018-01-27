@@ -21,21 +21,36 @@ class CounterStore {
   private mElement = null as any;
 
   constructor() {
-    if (this.isElectron) {
-      ipcRenderer.on("counter-delta-reply", (event:any, arg:number) => {
+    if (this.isElectronRenderer) {
+      //
+      // Electron Renderer, so only register for r2m-*-reply's and w2r-*'s here
+      //
+      ipcRenderer.on("r2m-counter-delta-reply", (event:any, arg:number) => {
         this.setReply(arg);
       });
-      ipcRenderer.on("open-dev-tools-webview-reply", (event:any, arg:string) => {
+      ipcRenderer.on("r2m-open-dev-tools-webview-reply", (event:any, arg:any) => {
         this.openDevToolsWebView();
       });
-      ipcRenderer.on("browser-back-webview-reply", (event:any, arg:string) => {
+      ipcRenderer.on("r2m-browser-back-webview-reply", (event:any, arg:any) => {
         this.browserBackWebView();
       });
-      ipcRenderer.send("menu-for-webview");
+      ipcRenderer.on("w2r-counter-delta", (event:any, arg:any) => {
+        ipcRenderer.send("r2m-counter-delta", arg);
+      });
+      //
+      // Electron Renderer initiated initializer calls
+      //
+      ipcRenderer.send("r2m-menu-for-webview");
     } else if (this.isInHybridWebView) {
-      ipcRenderer.on("webview-counter-delta-reply", (event:any, arg:number) => {
+      //
+      // Hybrid Web View, so only register for w2r-*-reply's here
+      //
+      ipcRenderer.on("w2r-counter-delta-reply", (event:any, arg:number) => {
         this.setReply(arg);
       });
+      //
+      // Hybrid Web View initiated initializer calls
+      //
     } else {
       // alert("no electron access - presumably loaded as a conventional web page in a conventional browser");
     }
@@ -56,10 +71,10 @@ class CounterStore {
   }
 
   @action public change(value:number) {
-    if (this.isElectron) {
-      ipcRenderer.send("counter-delta", { delta:value });
+    if (this.isElectronRenderer) {
+      ipcRenderer.send("r2m-counter-delta", { delta:value });
     } else if (this.isInHybridWebView) {
-      ipcRenderer.sendToHost("webview-counter-delta", { delta:value });
+      ipcRenderer.sendToHost("w2r-counter-delta", { delta:value });
     } else {
       //
       // manage the state locally without talking to the Electron backend,
@@ -102,7 +117,7 @@ class CounterStore {
         this.mElement.setAttribute("webviewlistener", "true");
         //
         // NOTE: By convention this app only allows loaded pages to register
-        //       and call routes starting with "webview-", so that all messages
+        //       and call routes starting with "w2r-", so that all messages
         //       from the webview can be inspected and approved by this electron
         //       renderer process before passing them on to the electron backend
         //       process. It"s important that untrusted websites and web content
@@ -112,19 +127,19 @@ class CounterStore {
         this.mElement.addEventListener("ipc-message", (event:any) => {
           const key = event.channel as string;
           switch (key) {
-          case "webview-counter-delta": this.change(event.args[0].delta as number); break;
+          case "w2r-counter-delta": this.change(event.args[0].delta as number); break;
           }
         });
         //
         // Relay state updates to the webview
         //
         this.mDisposers.push(autorun(() => {
-          this.mElement.send("webview-counter-delta-reply", this.value);
+          this.mElement.send("w2r-counter-delta-reply", this.value);
         }));
         //
         // Initialize
         //
-        this.mElement.send("webview-counter-delta-reply", this.value);
+        this.mElement.send("w2r-counter-delta-reply", this.value);
         // Uncomment next line to automatically open the devTools window after the content loads
         // element.openDevTools();
       }

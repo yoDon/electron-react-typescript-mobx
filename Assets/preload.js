@@ -15,34 +15,41 @@ const { ipcRenderer } = require('electron');
     //
     // SECURITY WARNING here we do work to prevent exposing any functionality
     // or APIs that could compromise the user's computer. Only allow specific
-    // routes to be registered or called that are paths starting with "webview-",
-    // so the app can easily tell whether the messages it receives came from 
-    // the webview or from the backend. The electron backend should similarly never
-    // expose any routes starting with "webview-" (all "webview-" routes should
-    // be handled and potentially relayed to the server by the renderer hosting
-    // the hybrid web app page). It's important to avoid exposing core Electron
-    // capabilities to the loaded web page to prevent malicious pages or web content
-    // from taking control of the user's PC. 
+    // ipc routes to be registered and called that start with "w2r-"
+    // (a shorthand way of saying webview->renderer). This helps the app and
+    // the developer easily tell whether a message came from the webview
+    // or from the backend or renderer. The electron backend should similarly never
+    // register or expose any routes starting with "w2r-" (all "w2r-" routes should
+    // be handled by the renderer and if the renderer chooses to relay them to the main
+    // process the renderer should do so over an "r2m-"" channel (render->main).
+    // Messages sent the other direction should be on channels ending with "-reply"
+    // (eg. webview sends w2r-foo to renderer and renderer replys to webview via w2r-foo-reply).
+    // It's important to avoid exposing core Electron capabilities to the
+    // loaded web page to prevent malicious pages or web content from taking control
+    // of the user's PC. 
     //
     window.ipcRendererStub = {
-        on: (path, handler) => {
-            if (path.indexOf("webview-") === 0) {
+        on: (ipc, handler) => {
+            //
+            // note: ipc.substr(-"-reply".length) === "-reply" is a javascript form of ipc.endsWith("-reply")
+            //
+            if ((ipc.indexOf("w2r-") === 0) && (ipc.substr(-"-reply".length) === "-reply")) {
                 //
                 // NOTE: ipcRenderer.on is registering for messages
                 //       from the containing electron renderer, not
                 //       from the electron backend
                 //
-                ipcRenderer.on(path, handler);
+                ipcRenderer.on(ipc, handler);
             }
         },
-        sendToHost: (path, arg) => {
-            if (path.indexOf("webview-") === 0) {
+        sendToHost: (ipc, arg) => {
+            if ((ipc.indexOf("w2r-") === 0) && (ipc.substr(-"-reply".length) !== "-reply")) {
                 //
                 // NOTE: Send to host sends to the containing
                 //       electron renderer, not to the electron
                 //       backend
                 //
-                ipcRenderer.sendToHost(path,arg);
+                ipcRenderer.sendToHost(ipc,arg);
             }
         }
     };
