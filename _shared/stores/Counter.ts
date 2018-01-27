@@ -9,12 +9,12 @@ import { action, autorun, observable } from "mobx";
 // supported by ipcRendererStub.
 //
 
-const ipcRenderer = ((window as any).isElectron) ? (window as any).nodeRequire("electron").ipcRenderer : (window as any).ipcRendererStub;
+const ipcRenderer = ((window as any).isElectronRenderer) ? (window as any).nodeRequire("electron").ipcRenderer : (window as any).ipcRendererStub;
 
 class CounterStore {
 
-  public isElectron:boolean = (window as any).isElectron;
-  public isInHybridWebView:boolean = ((window as any).isElectron === false && ipcRenderer !== undefined && ipcRenderer !== null);
+  public isElectronRenderer:boolean = (window as any).isElectronRenderer;
+  public isInHybridWebView:boolean = ((window as any).isElectronRenderer === false && ipcRenderer !== undefined && ipcRenderer !== null);
   public hasElectronAccess:boolean = (ipcRenderer !== undefined && ipcRenderer !== null);
   @observable public value = 0;
   private mDisposers = [] as Array<() => void>;
@@ -42,7 +42,7 @@ class CounterStore {
   }
 
   public unregisterWebView(element:any) {
-    if (this.isElectron) {
+    if (this.isElectronRenderer) {
       this.mDisposers.forEach((disposer) => {
         disposer();
       });
@@ -96,7 +96,7 @@ class CounterStore {
   }
 
   private registerWebView_Impl(element:any) {
-    if (this.isElectron) {
+    if (this.isElectronRenderer) {
       this.mElement = element;
       if (this.mElement.getAttribute("webviewlistener") !== "true") {
         this.mElement.setAttribute("webviewlistener", "true");

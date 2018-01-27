@@ -22,7 +22,7 @@ import * as styles from "./styles.scss";
 //       (Fortunately after the first time this normally only needs to be repeated
 //        if you need to change preload.js, which should be a fairly rare occurance)
 //
-const preloadScript = ((window as any).isElectron === false) ? "" : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/../app/bin/Assets/preload.js"}`;
+const preloadScript = ((window as any).isElectronRenderer === false) ? "" : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/../app/bin/Assets/preload.js"}`;
 
 //
 // Note: you can set the WebView src attribute to ./index.html to just load this
@@ -52,7 +52,7 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
   }
 
   public render() {
-    if ((window as any).isElectron === false) {
+    if ((window as any).isElectronRenderer === false) {
       return (
         <div>
           <h2>WebView is only available directly in Electron</h2>
