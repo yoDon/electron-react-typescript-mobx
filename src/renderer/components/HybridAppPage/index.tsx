@@ -2,7 +2,7 @@ import { inject, observer } from "mobx-react";
 import * as React from "react";
 import * as ElectronWebView from "react-electron-web-view/lib/ElectronWebView";
 import { Link } from "react-router-dom";
-import StoreRoot from "../../../_shared/stores/StoreRoot";
+import StoreRoot from "../../../shared/stores/StoreRoot";
 
 import * as styles from "./styles.scss";
 
@@ -28,7 +28,7 @@ const preloadScript = ((window as any).isElectronRenderer === false) ? "" : `fil
 // Note: you can set the WebView src attribute to ./index.html to just load this
 //       app into itself as a WebView (handy for testing if stuff works) or to
 //       "https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample"
-//       to pull in a built version of the sample _site in this example code
+//       to pull in a built version of the sample site in this example code
 //       (but that page might not be entirely up to date with the main repo
 //       since we don"t currently have any automated build hooks to make sure
 //       they are in sync)

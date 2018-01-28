@@ -11,17 +11,17 @@ const target = (isWeb ? 'web' : 'electron-renderer');
 // 'react-hot-loader/patch',
 // 'webpack-dev-server/client?http://localhost:3000',
 // 'webpack/hot/only-dev-server',
-const entry = (isWeb ? { site: "./_site/app/app.tsx" } : { electron: "./_renderer/app/app.tsx" } );
+const entry = (isWeb ? { site: "./src/site/app/app.tsx" } : { electron: "./src/renderer/app/app.tsx" } );
 const htmlWebpackPlugin = (isWeb ? 
     new HtmlWebpackPlugin({
         filename: 'index.html',
-        template: '_site/app/index.html',
+        template: 'src/site/app/index.html',
         inject: false
     })
     :
     new HtmlWebpackPlugin({
         filename: 'electron.html',
-        template: '_renderer/app/electron.html',
+        template: 'src/renderer/app/electron.html',
         inject: false
     })
 );
