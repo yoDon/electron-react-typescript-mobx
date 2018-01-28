@@ -269,3 +269,5 @@ dist/index.html
 dist/electron.js.map
 dist/electron.js
 dist/electron.html
+dist/
+package-lock.json
