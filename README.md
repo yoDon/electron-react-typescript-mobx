@@ -40,7 +40,7 @@ either internal to Electron.NET or external to it fairly soon.
 
 ### Hack Hack Hack (end)
 
-Then use ```npm start``` to build the React/Typescript "client-side" code from _renderer into wwwroot, build the C# code into an Electron app, and start the neccessary development servers to run the app, or use one of the more specific commands listed below to perform just a part of the process.
+Then use ```npm start``` to build the React/Typescript "client-side" code from src/renderer into wwwroot, build the C# code into an Electron app, and start the neccessary development servers to run the app, or use one of the more specific commands listed below to perform just a part of the process.
 
 AND REMEMBER, don't forget to manually copy the ```./Assets``` folder as described in the previous section and then re-run ```npm start``` to run the complete build of the app
 
@@ -60,13 +60,13 @@ To debug the C# in Visual Studio, just attach to your running application instan
 
 ## Organization
 
-The ```_shared``` folder contains Typescript files shared between ```_site``` and ```_renderer```.
+The ```src/shared``` folder contains Typescript files shared between ```src/site``` and ```src/renderer```.
 
-The ```_site``` folder contains the Typescript source of an optional external website to be loaded into the Electron app as a Hybrid Web App.
+The ```src/site``` folder contains the Typescript source of an optional external website to be loaded into the Electron app as a Hybrid Web App.
 
-The ```_renderer``` folder contains the Typescript source of the Electron app's render content.
+The ```src/renderer``` folder contains the Typescript source of the Electron app's render content.
 
-```npm run js``` builds ```_site``` into wwwsite and ```_renderer``` into wwwroot.
+```npm run js``` builds ```src/site``` into wwwsite and ```src/renderer``` into wwwroot.
 
 ## Notes
 

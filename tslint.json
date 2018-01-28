@@ -5,6 +5,7 @@
     "tslint-react"
   ],
   "rules": {
+    "no-console": false,
     "indent": [true, "spaces"],
     "max-line-length": false,
     "space-before-function-paren": false,

@@ -36,8 +36,11 @@ function createWindow() {
       win.webContents.openDevTools();
     }, 1000);
   } else {
+    const a = path.resolve(__dirname, "dist/electron.html");
+    console.log(a);
+    const mangledPath = path.resolve(__dirname, "dist/electron.html").replace("src/main/", "").replace("src\\main\\", "");
     win.loadURL(url.format({
-      pathname: path.join(path.resolve(__dirname, "./dist"), "electron.html"),
+      pathname: mangledPath,
       protocol: "file:",
       slashes: true,
     }));

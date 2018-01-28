@@ -1,46 +1,54 @@
 {
-   // Use IntelliSense to find out which attributes exist for C# debugging
-   // Use hover for the description of the existing attributes
-   // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-   "version": "0.2.0",
-   "configurations": [
-        {
-            "name": ".NET Core Launch (web)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/bin/Debug/netcoreapp2.0/win-x64/SampleApp.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}",
-            "stopAtEntry": false,
-            "internalConsoleOptions": "openOnSessionStart",
-            "launchBrowser": {
-                "enabled": true,
-                "args": "${auto-detect-url}",
-                "windows": {
-                    "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}"
-                },
-                "osx": {
-                    "command": "open"
-                },
-                "linux": {
-                    "command": "xdg-open"
-                }
-            },
-            "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
-            },
-            "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
-            }
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:pickProcess}"
-        }
-    ]
+  "configurations": [
+    {
+      "name": "Debug Main Electron Process",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+      },
+      "runtimeArgs": [
+          "--enable-logging",
+          "--remote-debugging-port=9222"
+      ],
+      "cwd": "${workspaceRoot}",
+      "program": "${workspaceRoot}/src/main/index.js",
+      "timeout": 20000,
+      "sourceMaps": true,
+      "preLaunchTask": "build"
+    },
+    {
+      "name": "Debug Renderer Process",
+      "type": "chrome",
+      "request": "launch",
+      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+      "windows": {
+        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+      },
+      "runtimeArgs": [
+          "${workspaceRoot}/dist/electron.js",
+          "--enable-logging",
+          "--remote-debugging-port=9222"
+      ],
+      "timeout": 20000,
+      "sourceMaps": true,
+      "preLaunchTask": "build",
+      "webRoot": "${workspaceRoot}"
+    },
+    {
+      "name": "Attach to Main (Port 5858)",
+      "type": "node",
+      "request": "attach",
+      "port": 5858,
+      "sourceMaps": true
+    },
+    {
+      "name": "Attach to Renderer (Port 9222)",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "sourceMaps": false
+    }
+  ]
 }

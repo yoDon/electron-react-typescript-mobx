@@ -33,6 +33,9 @@ module.exports = {
         filename: "[name].js",
         path: path.resolve(__dirname, 'dist'),
     },
+    node: {
+        __dirname: false, // webpack should not override the value of __dirname (see https://github.com/electron/electron/issues/5107#issuecomment-299971806)
+      },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
