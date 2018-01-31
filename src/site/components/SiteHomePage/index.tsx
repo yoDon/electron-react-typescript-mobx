@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import * as styles from "./styles.scss";
 
-class HomePage extends React.Component {
+class SiteHomePage extends React.Component {
   public render() {
     return (
       <div className={styles.container}>
@@ -16,4 +16,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+export { SiteHomePage };

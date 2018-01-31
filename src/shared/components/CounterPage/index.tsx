@@ -1,7 +1,7 @@
 import { inject, observer } from "mobx-react";
 import * as React from "react";
 import { Link } from "react-router-dom";
-import StoreRoot from "../../stores/StoreRoot";
+import { StoreRoot } from "../../stores/StoreRoot";
 
 import * as styles from "./styles.scss";
 
@@ -43,4 +43,4 @@ class CounterPage extends React.Component<{appState:StoreRoot}, {}> {
 
 }
 
-export default CounterPage;
+export { CounterPage };

@@ -50,4 +50,4 @@ class HybridWebViewStore extends AbstractStore {
 
 }
 
-export default HybridWebViewStore;
+export { HybridWebViewStore };

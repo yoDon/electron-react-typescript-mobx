@@ -58,4 +58,4 @@ class WebViewPage extends React.Component {
 
 }
 
-export default WebViewPage;
+export { WebViewPage };

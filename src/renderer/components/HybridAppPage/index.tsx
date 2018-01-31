@@ -3,7 +3,7 @@ import * as path from "path";
 import * as React from "react";
 import * as ElectronWebView from "react-electron-web-view/lib/ElectronWebView";
 import { Link } from "react-router-dom";
-import StoreRoot from "../../../shared/stores/StoreRoot";
+import { StoreRoot } from "../../../shared/stores/StoreRoot";
 
 import * as styles from "./styles.scss";
 
@@ -164,4 +164,4 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
 
 }
 
-export default HybridAppPage;
+export { HybridAppPage };

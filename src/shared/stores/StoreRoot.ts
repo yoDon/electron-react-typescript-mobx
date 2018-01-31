@@ -1,5 +1,5 @@
-import Counter from "./Counter";
-import HybridWebViewStore from "./HybridWebViewStore";
+import { CounterStore } from "./Counter";
+import { HybridWebViewStore } from "./HybridWebViewStore";
 
 class StoreRoot {
   //
@@ -9,7 +9,7 @@ class StoreRoot {
   // multiple child stores
   //
   public hybridWebView = new HybridWebViewStore();
-  public counter = new Counter();
+  public counter = new CounterStore();
 }
 
-export default StoreRoot;
+export { StoreRoot };

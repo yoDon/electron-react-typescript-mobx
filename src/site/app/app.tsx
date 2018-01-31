@@ -3,9 +3,9 @@ import { Provider } from "mobx-react";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { HashRouter, Route } from "react-router-dom";
-import CounterPage from "../../shared/components/CounterPage";
-import StoreRoot from "../../shared/stores/StoreRoot";
-import SiteHomePage from "../components/SiteHomePage";
+import { CounterPage } from "../../shared/components/CounterPage";
+import { StoreRoot } from "../../shared/stores/StoreRoot";
+import { SiteHomePage } from "../components/SiteHomePage";
 
 import "./app.global.scss";
 

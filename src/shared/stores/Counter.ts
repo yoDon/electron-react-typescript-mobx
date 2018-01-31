@@ -82,4 +82,4 @@ class CounterStore extends AbstractStore {
 
 }
 
-export default CounterStore;
+export { CounterStore };

@@ -3,11 +3,11 @@ import { Provider } from "mobx-react";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { HashRouter, Route } from "react-router-dom";
-import CounterPage from "../../shared/components/CounterPage";
-import StoreRoot from "../../shared/stores/StoreRoot";
-import HomePage from "../components/HomePage";
-import HybridAppPage from "../components/HybridAppPage";
-import WebViewPage from "../components/WebViewPage";
+import { CounterPage } from "../../shared/components/CounterPage";
+import { StoreRoot } from "../../shared/stores/StoreRoot";
+import { HomePage } from "../components/HomePage";
+import { HybridAppPage } from "../components/HybridAppPage";
+import { WebViewPage } from "../components/WebViewPage";
 
 import "./app.global.scss";
 
