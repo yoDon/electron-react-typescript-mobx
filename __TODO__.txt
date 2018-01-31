@@ -1,3 +1,1 @@
 [ ] move duplicate scss declarations from */styles.scss, move to appGlobal and scss import
-
-[ ] Open inner dev tools button works but menu item does not

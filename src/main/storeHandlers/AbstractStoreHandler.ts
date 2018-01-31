@@ -50,9 +50,12 @@ abstract class AbstractStoreHandler {
       throw new Error("invalid channel direction for <" + ipc + ">");
     }
     const ipc2 = ipc + "-reply";
-    if (event !== null && event !== undefined && event.sender !== null && event.sender !== undefined) {
-      event.sender.send(ipc2, data);
+    if (event === null || event === undefined || event.sender !== null || event.sender !== undefined) {
+      throw new Error("invalid event <" + ipc + ">");
     }
+
+    event.sender.send(ipc2, data);
+
   }
 
 }
