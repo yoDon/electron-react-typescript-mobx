@@ -16,6 +16,7 @@
   "license": "MIT",
   "main": "src/main/index.ts",
   "scripts": {
+    "foo": "asar list ./dist/win-unpacked/resources/app.asar",
     "start": "npm run pack-dev && concurrently \"npm run start-dev\" \"npm run start-electron\"",
     "pack-dev":  "tsc src/main/index.ts && webpack --target web --config webpack.config.js && webpack --config webpack.config.js",
     "pack-prod": "tsc src/main/index.ts && webpack --target web --config webpack.production.config.js && webpack --config webpack.production.config.js",

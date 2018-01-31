@@ -42,7 +42,7 @@ const { ipcRenderer } = require('electron');
                 ipcRenderer.on(ipc, handler);
             }
         },
-        sendToHost: (ipc, arg) => {
+        send: (ipc, arg) => {
             if ((ipc.indexOf("w2r-") === 0) && (ipc.substr(-"-reply".length) !== "-reply")) {
                 //
                 // NOTE: Send to host sends to the containing

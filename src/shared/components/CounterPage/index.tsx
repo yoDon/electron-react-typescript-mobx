@@ -19,8 +19,6 @@ class CounterPage extends React.Component<{appState:StoreRoot}, {}> {
         </div>
         <div className={`counter ${styles.counter}`}>
           {this.props.appState.counter.value}
-          <br/>
-          {this.props.appState.counter.hasElectronAccess ? "C# Value" : "JS Value"}
         </div>
         <div className={styles.btnGroup}>
           <button className={styles.btn} onClick={this.increment}>

@@ -1,10 +1,13 @@
-import { app, BrowserWindow, screen } from "electron";
+import { app, BrowserWindow /*, screen */ } from "electron";
 import * as path from "path";
 import * as url from "url";
+import { RootHandler } from "./storeHandlers/RootHandler";
 
 const nodeEnv = process.env.NODE_ENV;
 
 // crashReporter.start();
+
+const storeRootHandler = new RootHandler();
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
@@ -18,12 +21,14 @@ app.on("ready", () => {
     sourceMapSupport.install();
   }
   createWindow();
+  storeRootHandler.register();
 });
 
 function createWindow() {
   // { width: 1024, height: 728 }
-  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-  const win = new BrowserWindow({ width, height });
+  // const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  // const win = new BrowserWindow({ width, height });
+  const win = new BrowserWindow();
 
   if (nodeEnv === "development") {
     // delay 1000ms to wait for webpack-dev-server start

@@ -7,7 +7,7 @@ import * as styles from "./styles.scss";
 class WebViewPage extends React.Component {
 
   public render() {
-    if ((window as any).isElectronRenderer) {
+    if ((window as any).isInElectronRenderer) {
       return (
         <div>
           <ElectronWebView src="http://github.com" className={styles.webView} />

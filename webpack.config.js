@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 var argv = minimist(process.argv.slice(2));
 const isWeb = (argv && argv.target === 'web');
 const target = (isWeb ? 'web' : 'electron-renderer');
-// DONTODO add to entry:
+// DONTODO add to entry?
 // 'react-hot-loader/patch',
 // 'webpack-dev-server/client?http://localhost:3000',
 // 'webpack/hot/only-dev-server',

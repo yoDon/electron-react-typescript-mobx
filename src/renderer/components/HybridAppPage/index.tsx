@@ -1,4 +1,5 @@
 import { inject, observer } from "mobx-react";
+import * as path from "path";
 import * as React from "react";
 import * as ElectronWebView from "react-electron-web-view/lib/ElectronWebView";
 import { Link } from "react-router-dom";
@@ -22,7 +23,10 @@ import * as styles from "./styles.scss";
 //       (Fortunately after the first time this normally only needs to be repeated
 //        if you need to change preload.js, which should be a fairly rare occurance)
 //
-const preloadScript = ((window as any).isElectronRenderer === false) ? "" : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/../app/bin/Assets/preload.js"}`;
+const preloadScript = ((window as any).isInElectronRenderer === false)
+                    ? ""
+                    // : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/../app/bin/Assets/preload.js"}`;
+                    : `file://${path.resolve("./static/preload.js")}`;
 
 //
 // Note: you can set the WebView src attribute to ./index.html to just load this
@@ -44,15 +48,23 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
 
   public componentDidMount() {
     this.mElement = this.getWebView();
-    this.props.appState.counter.registerWebView(this.mElement);
+    if (this.mElement !== null && this.mElement !== undefined) {
+      this.mElement.addEventListener("dom-ready", () => {
+        this.props.appState.hybridWebView.registerWebViewForIpc(this.mElement);
+        this.props.appState.counter.registerWebViewForIpc(this.mElement);
+        this.props.appState.hybridWebView.menuForWebView(true);
+      });
+    }
   }
 
   public componentWillUnmount() {
-    this.props.appState.counter.unregisterWebView(this.mElement);
+    this.props.appState.hybridWebView.unregisterWebViewForIpc(this.mElement);
+    this.props.appState.counter.unregisterWebViewForIpc(this.mElement);
+    this.props.appState.hybridWebView.menuForWebView(false);
   }
 
   public render() {
-    if ((window as any).isElectronRenderer === false) {
+    if ((window as any).isInElectronRenderer === false) {
       return (
         <div>
           <h2>WebView is only available directly in Electron</h2>
@@ -119,7 +131,7 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
           <button
             className="btn btn.main"
             style={{ margin:"15px", backgroundColor:"coral" }}
-            onClick={this.minus.bind}
+            onClick={this.minus}
           >
             Minus
           </button>
