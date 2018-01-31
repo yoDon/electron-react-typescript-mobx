@@ -25,9 +25,10 @@ var AbstractStoreHandler = /** @class */ (function () {
                 throw new Error("invalid channel direction for <" + ipc + ">");
             }
             var ipc2 = ipc + "-reply";
-            if (event !== null && event !== undefined && event.sender !== null && event.sender !== undefined) {
-                event.sender.send(ipc2, data);
+            if (event === null || event === undefined || event.sender !== null || event.sender !== undefined) {
+                throw new Error("invalid event <" + ipc + ">");
             }
+            event.sender.send(ipc2, data);
         };
     }
     return AbstractStoreHandler;

@@ -27,7 +27,6 @@ var HybridWebViewHandler = /** @class */ (function (_super) {
         return _this;
     }
     HybridWebViewHandler.prototype.createMenus = function (addWebViewItems) {
-        var _this = this;
         var menuTemplate = [
             {
                 label: "Edit",
@@ -48,33 +47,11 @@ var HybridWebViewHandler = /** @class */ (function (_super) {
                     { role: "zoomin" },
                     { role: "zoomout" },
                     { role: "togglefullscreen" },
-                    {
-                        accelerator: "CmdOrCtrl+Shift+I",
-                        click: function (menuItem, browserWindow, e) {
-                            _this.openDevToolsWebView(e);
-                        },
-                        label: "Open Inner Developer Tools",
-                        visible: addWebViewItems
-                    },
-                    {
-                        accelerator: "CmdOrCtrl+Shift+B",
-                        click: function (menuItem, browserWindow, e) {
-                            _this.browserBackWebView(e);
-                        },
-                        label: "Inner Back Button",
-                        visible: addWebViewItems
-                    },
                 ]
             },
         ];
         var menu = electron_1.Menu.buildFromTemplate(menuTemplate);
         electron_1.Menu.setApplicationMenu(menu);
-    };
-    HybridWebViewHandler.prototype.openDevToolsWebView = function (e) {
-        this.sendR2mReply("r2m-open-dev-tools-webview", e, "");
-    };
-    HybridWebViewHandler.prototype.browserBackWebView = function (e) {
-        this.sendR2mReply("r2m-browser-back-webview", e, "");
     };
     return HybridWebViewHandler;
 }(AbstractStoreHandler_1.AbstractStoreHandler));
