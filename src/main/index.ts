@@ -41,9 +41,8 @@ function createWindow() {
       win.webContents.openDevTools();
     }, 1000);
   } else {
-    const a = path.resolve(__dirname, "dist/electron.html");
-    console.log(a);
-    const mangledPath = path.resolve(__dirname, "dist/electron.html").replace("src/main/", "").replace("src\\main\\", "");
+    // __dirname is /src/main, where this file is
+    const mangledPath = path.resolve(__dirname, "../renderer/app/electron.html");
     win.loadURL(url.format({
       pathname: mangledPath,
       protocol: "file:",

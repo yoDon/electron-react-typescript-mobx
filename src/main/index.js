@@ -37,9 +37,8 @@ function createWindow() {
         }, 1000);
     }
     else {
-        var a = path.resolve(__dirname, "dist/electron.html");
-        console.log(a);
-        var mangledPath = path.resolve(__dirname, "dist/electron.html").replace("src/main/", "").replace("src\\main\\", "");
+        // __dirname is /src/main, where this file is
+        var mangledPath = path.resolve(__dirname, "../renderer/app/electron.html");
         win.loadURL(url.format({
             pathname: mangledPath,
             protocol: "file:",
