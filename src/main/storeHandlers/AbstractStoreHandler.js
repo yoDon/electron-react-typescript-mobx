@@ -28,6 +28,7 @@ var AbstractStoreHandler = /** @class */ (function () {
             if (event === null || event === undefined || event.sender !== null || event.sender !== undefined) {
                 throw new Error("invalid event <" + ipc + ">");
             }
+            // work around typescript typing bug with an any wrapper
             event.sender.send(ipc2, data);
         };
     }

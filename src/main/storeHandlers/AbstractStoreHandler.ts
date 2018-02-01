@@ -53,8 +53,8 @@ abstract class AbstractStoreHandler {
     if (event === null || event === undefined || event.sender !== null || event.sender !== undefined) {
       throw new Error("invalid event <" + ipc + ">");
     }
-
-    event.sender.send(ipc2, data);
+    // work around typescript typing bug with an any wrapper
+    (event.sender as any).send(ipc2, data);
 
   }
 

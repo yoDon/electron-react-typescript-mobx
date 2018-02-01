@@ -63,7 +63,7 @@ abstract class AbstractStore {
     if (this.isInElectronRenderer === false) {
       throw new Error("invalid channel handler for <" + ipc + ">");
     }
-    if ((register[ipc] !== null) && (register[ipc] !== undefined)) {
+    if (register[ipc] === true) {
       throw new Error("duplicate channel definitions for <" + ipc + ">");
     }
     if (ipc.indexOf("r2m-") !== 0) {
@@ -80,7 +80,7 @@ abstract class AbstractStore {
     if (this.isInElectronRenderer === false) {
       throw new Error("invalid channel handler for <" + ipc + ">");
     }
-    if ((register[ipc] !== null) && (register[ipc] !== undefined)) {
+    if (register[ipc] === true) {
       throw new Error("duplicate channel definitions for <" + ipc + ">");
     }
     if (ipc.indexOf("w2r-") !== 0) {
@@ -97,7 +97,7 @@ abstract class AbstractStore {
     if (this.isInElectronRenderer) {
       throw new Error("invalid channel handler for <" + ipc + ">");
     }
-    if ((register[ipc] !== null) && (register[ipc] !== undefined)) {
+    if (register[ipc] === true) {
       throw new Error("duplicate channel definitions for <" + ipc + ">");
     }
     if (ipc.indexOf("w2r-") !== 0) {
@@ -174,7 +174,7 @@ abstract class AbstractStore {
         this.mElement.addEventListener("ipc-message", (event:any) => {
           const ipc = event.channel as string;
           const handler = ipcHandlers[ipc];
-          if (handler !== null && handler !== undefined) {
+          if (handler) {
             handler(ipc, event, event.args[0]);
           }
         });

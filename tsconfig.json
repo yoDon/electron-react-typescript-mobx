@@ -13,11 +13,12 @@
         "allowJs": false,
         "strict": true,
         "alwaysStrict": true,
-        "strictNullChecks": false,
+        "strictNullChecks": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
         "noUnusedLocals": true,
         "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
     }
 }
