@@ -271,3 +271,4 @@ dist/electron.js
 dist/electron.html
 dist/
 package-lock.json
+yarn.lock
