@@ -29,7 +29,7 @@ const register:IDict<boolean> = {};
 abstract class AbstractStoreHandler {
 
   public onR2m = (ipc:string, handler:((ipc:string, event:Event, arg:any) => void)) => {
-    if ((register[ipc] !== null) && (register[ipc] !== undefined)) {
+    if (register[ipc] === true) {
       throw new Error("duplicate channel definitions for <" + ipc + ">");
     }
     if (ipc.indexOf("r2m-") !== 0) {

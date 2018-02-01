@@ -5,7 +5,7 @@ var register = {};
 var AbstractStoreHandler = /** @class */ (function () {
     function AbstractStoreHandler() {
         this.onR2m = function (ipc, handler) {
-            if ((register[ipc] !== null) && (register[ipc] !== undefined)) {
+            if (register[ipc] === true) {
                 throw new Error("duplicate channel definitions for <" + ipc + ">");
             }
             if (ipc.indexOf("r2m-") !== 0) {
