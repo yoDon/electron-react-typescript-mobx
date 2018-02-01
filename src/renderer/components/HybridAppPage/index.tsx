@@ -6,12 +6,16 @@ import { StoreRoot } from "../../../shared/stores/StoreRoot";
 
 import * as styles from "./styles.scss";
 
+const nodeEnv = process.env.NODE_ENV;
+
 //
 // NOTE: the WebView tag only accepts the file: protocol for the preload script
 //       so the preload.js file must be included in the app as a resource
 //
 const preloadScript = ((window as any).isInElectronRenderer === false)
                     ? ""
+                    : (nodeEnv === "development")
+                    ? `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "../../../../../../../../../../static/preload.js"}`
                     : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/static/preload.js"}`;
 
 //
