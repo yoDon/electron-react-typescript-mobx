@@ -16,14 +16,62 @@
   "license": "MIT",
   "main": "src/main/index.js",
   "scripts": {
-    "foo": "asar list ./dist/win-unpacked/resources/app.asar",
+    "asarlist": "asar list ./dist/win-unpacked/resources/app.asar",
     "start": "yarn run pack-dev && concurrently \"yarn run start-dev\" \"yarn run start-electron\"",
     "pack-dev":  "tsc src/main/index.ts && webpack --target web --config webpack.config.js && webpack --config webpack.config.js",
     "pack-prod": "tsc src/main/index.ts && webpack --target web --config webpack.production.config.js && webpack --config webpack.production.config.js",
-    "start-dev": "cross-env NODE_ENV=development webpack-dev-server",
+    "start-dev":      "cross-env NODE_ENV=development webpack-dev-server",
     "start-electron": "cross-env NODE_ENV=development electron src/main/index --enable-logging --remote-debugging-port=9222 --debug-brk=5858",
-    "build":          "cross-env NODE_ENV=production yarn run pack-dev && build",
+    "build":          "cross-env NODE_ENV=production yarn run pack-dev && build --dir",
+    "dev":            "cross-env NODE_ENV=production yarn run pack-dev && build --linux --win",
     "prod":           "cross-env NODE_ENV=production yarn run pack-prod && build --linux --win"
+  },
+  "build": {
+    "appId": "com.example.electron-react-typescript-mobx",
+    "productName": "Sample App",
+    "copyright": "Copyright © year ${author}",
+    "forceCodeSigning": false,
+    "directories": {
+      "buildResources": "build",
+      "output": "electron"
+    },
+    "files": [
+      "node_modules/**",
+      "src/main/**/*.js",
+      "dist/electron.html",
+      "dist/electron.js",
+      "dist/index.html",
+      "dist/site.js",
+      "static/**",
+      "LICENSE"
+    ],
+    "asarUnpack": [
+      "static/preload.js"
+    ],
+    "extraResources": [
+    ],
+    "extraFiles": [
+    ],
+    "mac": {
+    },
+    "mas": {
+    },
+    "dmg": {
+    },
+    "pkg": {
+    },
+    "win": {
+    },
+    "nsis": {
+    },
+    "nsisWeb": {
+    },
+    "portable": {
+    },
+    "appx": {
+    },
+    "squirrelWindows": {
+    }
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
