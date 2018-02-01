@@ -48,8 +48,17 @@ const ipcRenderer = (window as any).isInElectronRenderer
 //       and end up with two competing functions mapped to the same string).
 //
 
-const register:IDict<boolean> = {};
-const ipcHandlers:IDict<(ipc:string, event:Event, arg:any) => void> = {};
+const ipcMainRegistered:IDict<boolean> = {};
+let ipcWebViewRegistered:IDict<boolean> = {};
+let ipcWebViewHandlers:IDict<(ipc:string, event:Event, arg:any) => void> = {};
+
+const ipcMessageEventListener = (event:any) => {
+  const ipc = event.channel as string;
+  const handler = ipcWebViewHandlers[ipc];
+  if (handler) {
+    handler(ipc, event, event.args[0]);
+  }
+};
 
 abstract class AbstractStore {
 
@@ -63,7 +72,7 @@ abstract class AbstractStore {
     if (this.isInElectronRenderer === false) {
       throw new Error("invalid channel handler for <" + ipc + ">");
     }
-    if (register[ipc] === true) {
+    if (ipcMainRegistered[ipc] === true) {
       throw new Error("duplicate channel definitions for <" + ipc + ">");
     }
     if (ipc.indexOf("r2m-") !== 0) {
@@ -72,7 +81,7 @@ abstract class AbstractStore {
     if (ipc.substr(-"-reply".length) === "-reply") {
       throw new Error("invalid channel name for <" + ipc + ">");
     }
-    register[ipc] = true;
+    ipcMainRegistered[ipc] = true;
     ipcRenderer.on(ipc + "-reply", (event:Event, arg:any) => { handler(ipc, event, arg); });
   }
 
@@ -80,7 +89,7 @@ abstract class AbstractStore {
     if (this.isInElectronRenderer === false) {
       throw new Error("invalid channel handler for <" + ipc + ">");
     }
-    if (register[ipc] === true) {
+    if (ipcWebViewRegistered[ipc] === true) {
       throw new Error("duplicate channel definitions for <" + ipc + ">");
     }
     if (ipc.indexOf("w2r-") !== 0) {
@@ -89,15 +98,15 @@ abstract class AbstractStore {
     if (ipc.substr(-"-reply".length) === "-reply") {
       throw new Error("invalid channel name for <" + ipc + ">");
     }
-    register[ipc] = true;
-    ipcHandlers[ipc] = handler;
+    ipcWebViewRegistered[ipc] = true;
+    ipcWebViewHandlers[ipc] = handler;
   }
 
   public onW2rReply = (ipc:string, handler:((ipc:string, event:Event, arg:any) => void)) => {
     if (this.isInElectronRenderer) {
       throw new Error("invalid channel handler for <" + ipc + ">");
     }
-    if (register[ipc] === true) {
+    if (ipcMainRegistered[ipc] === true) {
       throw new Error("duplicate channel definitions for <" + ipc + ">");
     }
     if (ipc.indexOf("w2r-") !== 0) {
@@ -106,7 +115,7 @@ abstract class AbstractStore {
     if (ipc.substr(-"-reply".length) === "-reply") {
       throw new Error("invalid channel name for <" + ipc + ">");
     }
-    register[ipc] = true;
+    ipcMainRegistered[ipc] = true;
     ipcRenderer.on(ipc + "-reply", (event:Event, arg:any) => { handler(ipc, event, arg); });
   }
 
@@ -154,9 +163,10 @@ abstract class AbstractStore {
       this.mDisposers.forEach((disposer) => {
         disposer();
       });
+      ipcWebViewRegistered = {};
+      ipcWebViewHandlers = {};
       if (this.mElement !== null) {
-        this.mElement.removeEventListener("ipc-message-host");
-        this.mElement.ipcHandlers = null;
+        this.mElement.removeEventListener("ipc-message-host", ipcMessageEventListener);
         this.mElement = null;
         return true; // ---- EARLY RETURN ----
       }
@@ -171,13 +181,7 @@ abstract class AbstractStore {
       }
       if (this.mElement.getAttribute("webviewlistener") !== "true") {
         this.mElement.setAttribute("webviewlistener", "true");
-        this.mElement.addEventListener("ipc-message", (event:any) => {
-          const ipc = event.channel as string;
-          const handler = ipcHandlers[ipc];
-          if (handler) {
-            handler(ipc, event, event.args[0]);
-          }
-        });
+        this.mElement.addEventListener("ipc-message", ipcMessageEventListener);
       }
       if (this.mElement.getAttribute("webviewlistener-" + key) !== "true") {
         this.mElement.setAttribute("webviewlistener-" + key, "true");
