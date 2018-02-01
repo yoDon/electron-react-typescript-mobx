@@ -74,19 +74,10 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
           Counter: <b>{this.props.appState.counter.value}</b>
         </div>
         <div style={{ margin:"15px" }}>
-          VERY IMPORTANT for now you need to manually copy the ./Assets folder into
-          a couple of nested node_modules locations after building for the first time,
-          as described in the repo readme. If you forgot to do that, you"ll either
-          see white above where the WebView should be or when you click on "Counter"
-          you"ll see the WebView telling you it"s using JS rather than C# to track
-          the counter state and it"s not updating the main Electron counter state,
-          both of which are because it didn"t receive the electron access it needs
-          (see the next section for more info).
-        </div>
           You can also load the contained page (https://yodon.github.io/electron-react-typescript-mobx/sample)
           in your browser where it does not have access to the Electron API. In that case the
           contained code will use "local state" maintained in JS rather than "electron state"
-          maintained by C#
+          maintained by the main process
         </div>
         <div className={styles.backButton}>
           <Link to="/" style={{ marginRight:"60px" }}>

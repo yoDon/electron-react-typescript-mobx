@@ -7,7 +7,7 @@ import { CounterPage } from "../../shared/components/CounterPage";
 import { StoreRoot } from "../../shared/stores/StoreRoot";
 import { SiteHomePage } from "../components/SiteHomePage";
 
-import "./app.global.scss";
+import "../../shared/app/app.global.scss";
 
 useStrict(true);
 

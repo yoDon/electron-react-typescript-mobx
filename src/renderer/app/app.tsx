@@ -5,11 +5,11 @@ import * as ReactDOM from "react-dom";
 import { HashRouter, Route } from "react-router-dom";
 import { CounterPage } from "../../shared/components/CounterPage";
 import { StoreRoot } from "../../shared/stores/StoreRoot";
-import { HomePage } from "../components/HomePage";
+import { AppHomePage } from "../components/AppHomePage";
 import { HybridAppPage } from "../components/HybridAppPage";
 import { WebViewPage } from "../components/WebViewPage";
 
-import "./app.global.scss";
+import "../../shared/app/app.global.scss";
 
 useStrict(true);
 
@@ -22,7 +22,7 @@ ReactDOM.render(
                 <Route exact={true} path="/counter" component={CounterPage} />
                 <Route exact={true} path="/webview" component={WebViewPage} />
                 <Route exact={true} path="/hybrid" component={HybridAppPage} />
-                <Route exact={true} path="/" component={HomePage} />
+                <Route exact={true} path="/" component={AppHomePage} />
             </div>
         </HashRouter>
     </Provider>,

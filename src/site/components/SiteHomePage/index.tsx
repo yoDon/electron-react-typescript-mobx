@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import * as styles from "./styles.scss";
+import * as styles from "../../../shared/components/HomePage/styles.scss";
 
 class SiteHomePage extends React.Component {
   public render() {

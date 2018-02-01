@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 
-import * as styles from "./styles.scss";
+import * as styles from "../../../shared/components/HomePage/styles.scss";
 
-class HomePage extends React.Component {
+class AppHomePage extends React.Component {
   public render() {
     return (
       <div className={styles.container}>
@@ -18,4 +18,4 @@ class HomePage extends React.Component {
   }
 }
 
-export { HomePage };
+export { AppHomePage };
