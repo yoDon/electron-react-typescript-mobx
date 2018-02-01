@@ -17,14 +17,14 @@ const preloadScript = ((window as any).isInElectronRenderer === false)
 //
 // Note: you can set the WebView src attribute to ./index.html to just load the local bundled
 //       src/site into the app as a WebView (handy for testing if stuff works) or to
-//       "https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample"
+//       "https://yodon.github.io/electron-react-typescript-mobx/sample"
 //       to pull in a built version of the sample site in this example code
 //       (but that page might not be entirely up to date with the main repo
 //       since we don"t currently have any automated build hooks to make sure
 //       they are in sync)
 //
 const electronWebViewSrc = "./index.html";
-// const electronWebViewSrc = "https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample
+// const electronWebViewSrc = "https://yodon.github.io/electron-react-typescript-mobx/sample
 
 @inject("appState")
 @observer
@@ -83,8 +83,7 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
           both of which are because it didn"t receive the electron access it needs
           (see the next section for more info).
         </div>
-        <div style={{ margin:"15px" }}>
-          You can also load the contained page (https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample)
+          You can also load the contained page (https://yodon.github.io/electron-react-typescript-mobx/sample)
           in your browser where it does not have access to the Electron API. In that case the
           contained code will use "local state" maintained in JS rather than "electron state"
           maintained by C#

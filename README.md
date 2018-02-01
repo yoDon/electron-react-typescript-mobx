@@ -1,4 +1,4 @@
-# <img src="https://cloud.githubusercontent.com/assets/378023/15172388/b2b81950-1790-11e6-9a7c-ccc39912bb3a.png" width="60px" align="center" alt="ElectronNET-React-Typescript-MobX"> ElectronNET-React-Typescript-MobX  
+# <img src="https://cloud.githubusercontent.com/assets/378023/15172388/b2b81950-1790-11e6-9a7c-ccc39912bb3a.png" width="60px" align="center" alt="electron-react-typescript-mobx"> electron-react-typescript-mobx  
   
 When I read about [Electron.NET](https://github.com/ElectronNET/Electron.NET) (a variant of Electron with C# and dotnet core for the "server" process), I was hooked but wanted a React and Typescript front-end sample. That quest led to creating this repo which works on Windows, macOS and Linux operating systems.
 
@@ -11,10 +11,9 @@ You'll need [Node.js (v.8.x)](https://nodejs.org) and [.NET Core SDK](https://ww
 First download and install:
 
 ```bash
-$ git clone https://github.com/yoDon/Electron.NET-React-Typescript-MobX.git
-$ cd Electron.NET-React-Typescript-MobX
-$ dotnet restore
-$ npm install
+$ git clone https://github.com/yoDon/electron-react-typescript-mobx.git
+$ cd electron-react-typescript-mobx
+$ yarn
 ```
 
 ### Hack Hack Hack (begin)
