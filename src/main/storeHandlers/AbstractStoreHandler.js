@@ -25,7 +25,7 @@ var AbstractStoreHandler = /** @class */ (function () {
                 throw new Error("invalid channel direction for <" + ipc + ">");
             }
             var ipc2 = ipc + "-reply";
-            if (event === null || event === undefined || event.sender !== null || event.sender !== undefined) {
+            if (event === null || event === undefined || event.sender === null || event.sender === undefined) {
                 throw new Error("invalid event <" + ipc + ">");
             }
             // work around typescript typing bug with an any wrapper
