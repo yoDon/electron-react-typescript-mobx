@@ -1,5 +1,4 @@
 import { inject, observer } from "mobx-react";
-import * as path from "path";
 import * as React from "react";
 import * as ElectronWebView from "react-electron-web-view/lib/ElectronWebView";
 import { Link } from "react-router-dom";
@@ -11,26 +10,13 @@ import * as styles from "./styles.scss";
 // NOTE: the WebView tag only accepts the file: protocol for the preload script
 //       so the preload.js file must be included in the app as a resource
 //
-// NOTE: As of Nov 2017, when building a dev version on a PC the preloadScript
-//       must be manually copied into the obj\Host folders as follows:
-//
-//     PC:  obj\Host\node_modules\electron\dist\resources\ <- this much exists after npm run cs
-//                  app\bin\Assets\preload.js <---------- create these folders and copy in preload.js
-//
-//  or OSX: obj/Host/node_modules/electron/dist/Electron.app/Contents/Resources/ <- this much exists after npm run cs
-//                  app/bin/Asssets/preload.js <------------------------------- create these folders and copy in preload.js
-//
-//       (Fortunately after the first time this normally only needs to be repeated
-//        if you need to change preload.js, which should be a fairly rare occurance)
-//
 const preloadScript = ((window as any).isInElectronRenderer === false)
                     ? ""
-                    // : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/../app/bin/Assets/preload.js"}`;
-                    : `file://${path.resolve("./static/preload.js")}`;
+                    : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/static/preload.js"}`;
 
 //
-// Note: you can set the WebView src attribute to ./index.html to just load this
-//       app into itself as a WebView (handy for testing if stuff works) or to
+// Note: you can set the WebView src attribute to ./index.html to just load the local bundled
+//       src/site into the app as a WebView (handy for testing if stuff works) or to
 //       "https://yodon.github.io/Electron.NET-React-Typescript-MobX/sample"
 //       to pull in a built version of the sample site in this example code
 //       (but that page might not be entirely up to date with the main repo

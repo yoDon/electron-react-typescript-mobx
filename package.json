@@ -14,7 +14,7 @@
     "url": "https://github.com/yoDon/Electron-React-Typescript-MobX.git"
   },
   "license": "MIT",
-  "main": "src/main/index.ts",
+  "main": "src/main/index.js",
   "scripts": {
     "foo": "asar list ./dist/win-unpacked/resources/app.asar",
     "start": "yarn run pack-dev && concurrently \"yarn run start-dev\" \"yarn run start-electron\"",
