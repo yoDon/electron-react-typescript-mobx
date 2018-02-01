@@ -1,1 +1,48 @@
 [ ] move duplicate scss declarations from */styles.scss, move to appGlobal and scss import
+[ ] improve readme
+[ ] production builds should not show console window
+[ ] create windows installer
+[ ] create OSX installer
+
+[x] Convert package.json to use yarn
+[ ] Create a new file that will be the entry point of your app (perhaps changing 'main' 
+    in package.json) - you need to pass in the root directory of your application, 
+    which will vary based on your setup. The root directory is the directory that your package.json is in.
+    
+    // Assuming this file is ./src/es6-init.js
+    var appRoot = path.join(__dirname, '..');
+    require('electron-compile').init(appRoot, require.resolve('./main'));
+    
+    From then on, you can now simply include files directly in your HTML, 
+    no need for cross-compilation eg. <script src="main.coffee"></script>
+
+    [ ] Live Reload / Hot Module Reloading. In your main file, before you create a BrowserWindow instance:
+        import {enableLiveReload} from 'electron-compile';
+        enableLiveReload();
+        [ ] React Hot Module Loading
+            npm install --save react-hot-loader@next
+            Call enableLiveReload({strategy: 'react-hmr'}); in your main file, after app.ready (similar to above)
+            [ ] In your index.html, replace your initial call to render:
+            import * as React from 'react';
+            import * as ReactDOM from 'react-dom';
+            import { AppContainer } from 'react-hot-loader';
+            const render = () => {
+              // NB: We have to re-require MyApp every time or else this won't work
+              // We also need to wrap our app in the AppContainer class
+              const MyApp = require('./myapp').MyApp;
+              ReactDOM.render(<AppContainer><MyApp/></AppContainer>, document.getElementById('app'));
+            }
+            render();
+            if (module.hot) { module.hot.accept(render); }
+    [ ] Populate the build folder
+    [ ] specify build configuration per https://github.com/electron-userland/electron-builder
+README
+------
+[ ] yarn strongly recommended because of https://github.com/electron-userland/electron-builder/issues/1147#issuecomment-276284477
+    [ ] yarn is product of same FB engineering team that produced react. It's primarily faster than yarn but also better and here we care about the better part.
+    [ ] install yarn https://yarnpkg.com/en/docs/install and https://marketplace.visualstudio.com/items?itemName=gamunu.vscode-yarn
+
+[ ] uses electron-builder https://github.com/electron-userland/electron-builder
+    [ ] http://electron.rocks/electron-builder-explained/
+    [ ] electron-builder uses electron-compile https://github.com/electron-userland/electron-compile
+    [ ] this repo uses typescript but you can also add all those other languages (I've not test that)
