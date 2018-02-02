@@ -17,13 +17,13 @@
   "main": "src/main/index.js",
   "scripts": {
     "start": "npm run pack-dev && concurrently \"npm run start-server\" \"npm run start-electron\"",
-    "pack-dev":  "tsc src/main/index.ts && webpack --target web --config webpack.config.js && webpack --config webpack.config.js",
+    "pack-dev": "tsc src/main/index.ts && webpack --target web --config webpack.config.js && webpack --config webpack.config.js",
     "pack-prod": "tsc src/main/index.ts && webpack --target web --config webpack.production.config.js && webpack --config webpack.production.config.js",
-    "start-server":   "cross-env NODE_ENV=development webpack-dev-server",
+    "start-server": "cross-env NODE_ENV=development webpack-dev-server",
     "start-electron": "cross-env NODE_ENV=development electron src/main/index --enable-logging --remote-debugging-port=9222 --debug-brk=5858",
     "build-debug": "npm run pack-dev && electron-builder --dir",
-    "build-win":   "npm run pack-prod && electron-builder --win",
-    "build-mac":   "npm run pack-prod && electron-builder --mac",
+    "build-win": "npm run pack-prod && electron-builder --win",
+    "build-mac": "npm run pack-prod && electron-builder --mac",
     "build-linux": "npm run pack-prod && electron-builder --linux",
     "build": "npm run build-debug",
     "asarlist": "asar list ./dist/win-unpacked/resources/app.asar"
@@ -50,30 +50,18 @@
     "asarUnpack": [
       "static/preload.js"
     ],
-    "extraResources": [
-    ],
-    "extraFiles": [
-    ],
-    "mac": {
-    },
-    "mas": {
-    },
-    "dmg": {
-    },
-    "pkg": {
-    },
-    "win": {
-    },
-    "nsis": {
-    },
-    "nsisWeb": {
-    },
-    "portable": {
-    },
-    "appx": {
-    },
-    "squirrelWindows": {
-    }
+    "extraResources": [],
+    "extraFiles": [],
+    "mac": {},
+    "mas": {},
+    "dmg": {},
+    "pkg": {},
+    "win": {},
+    "nsis": {},
+    "nsisWeb": {},
+    "portable": {},
+    "appx": {},
+    "squirrelWindows": {}
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
