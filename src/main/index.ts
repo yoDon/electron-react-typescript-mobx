@@ -16,7 +16,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("ready", () => {
-  if (nodeEnv === "development") {
+  if (nodeEnv !== "production") {
     const sourceMapSupport = require("source-map-support");
     sourceMapSupport.install();
   }
@@ -30,7 +30,7 @@ function createWindow() {
   // const win = new BrowserWindow({ width, height });
   const win = new BrowserWindow();
 
-  if (nodeEnv === "development") {
+  if (nodeEnv !== "production") {
     // delay 1000ms to wait for webpack-dev-server start
     setTimeout(() => {
       win.loadURL(url.format({

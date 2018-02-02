@@ -13,7 +13,7 @@ electron_1.app.on("window-all-closed", function () {
     }
 });
 electron_1.app.on("ready", function () {
-    if (nodeEnv === "development") {
+    if (nodeEnv !== "production") {
         var sourceMapSupport = require("source-map-support");
         sourceMapSupport.install();
     }
@@ -25,7 +25,7 @@ function createWindow() {
     // const { width, height } = screen.getPrimaryDisplay().workAreaSize;
     // const win = new BrowserWindow({ width, height });
     var win = new electron_1.BrowserWindow();
-    if (nodeEnv === "development") {
+    if (nodeEnv !== "production") {
         // delay 1000ms to wait for webpack-dev-server start
         setTimeout(function () {
             win.loadURL(url.format({

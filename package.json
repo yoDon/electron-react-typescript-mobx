@@ -16,15 +16,17 @@
   "license": "MIT",
   "main": "src/main/index.js",
   "scripts": {
-    "asarlist": "asar list ./dist/win-unpacked/resources/app.asar",
-    "start": "yarn run pack-dev && concurrently \"yarn run start-dev\" \"yarn run start-electron\"",
+    "start": "npm run pack-dev && concurrently \"npm run start-server\" \"npm run start-electron\"",
     "pack-dev":  "tsc src/main/index.ts && webpack --target web --config webpack.config.js && webpack --config webpack.config.js",
     "pack-prod": "tsc src/main/index.ts && webpack --target web --config webpack.production.config.js && webpack --config webpack.production.config.js",
-    "start-dev":      "cross-env NODE_ENV=development webpack-dev-server",
-    "start-electron": "cross-env NODE_ENV=development electron src/main/index --enable-logging --remote-debugging-port=9222 --debug-brk=5858",
-    "build":          "cross-env NODE_ENV=production yarn run pack-dev && build --dir",
-    "dev":            "cross-env NODE_ENV=production yarn run pack-dev && build --linux --win",
-    "prod":           "cross-env NODE_ENV=production yarn run pack-prod && build --linux --win"
+    "start-server":   "webpack-dev-server",
+    "start-electron": "electron src/main/index --enable-logging --remote-debugging-port=9222 --debug-brk=5858",
+    "build-debug":    "npm run pack-prod && electron-builder --dir",
+    "build-win":      "npm run pack-prod && electron-builder --win",
+    "build-mac":      "npm run pack-prod && electron-builder --mac",
+    "build-linux":    "npm run pack-prod && electron-builder --linux",
+    "build": "npm run build-debug",
+    "asarlist": "asar list ./dist/win-unpacked/resources/app.asar"
   },
   "build": {
     "appId": "com.example.electron-react-typescript-mobx",

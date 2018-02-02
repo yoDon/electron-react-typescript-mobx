@@ -14,9 +14,9 @@ const nodeEnv = process.env.NODE_ENV;
 //
 const preloadScript = ((window as any).isInElectronRenderer === false)
                     ? ""
-                    : (nodeEnv === "development")
-                    ? `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "../../../../../../../../../../static/preload.js"}`
-                    : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/static/preload.js"}`;
+                    : (nodeEnv === "production")
+                    ? `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/static/preload.js"}`
+                    : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "../../../../../../../../../../static/preload.js"}`;
 
 //
 // Note: you can set the WebView src attribute to ./index.html to just load the local bundled
