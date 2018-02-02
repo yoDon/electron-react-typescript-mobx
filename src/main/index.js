@@ -4,7 +4,8 @@ var electron_1 = require("electron");
 var path = require("path");
 var url = require("url");
 var RootHandler_1 = require("./storeHandlers/RootHandler");
-// NODE_ENV === undefined means we are running in the VS Code debugger
+// We want nodeEnv to contain either "production" or "development"
+// "development" means running in a local server with files loaded from project not from asar
 var nodeEnv = (process.env.NODE_ENV === undefined) ? "production" : process.env.NODE_ENV;
 // crashReporter.start();
 var storeRootHandler = new RootHandler_1.RootHandler();

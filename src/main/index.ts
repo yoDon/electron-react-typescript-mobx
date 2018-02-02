@@ -3,7 +3,8 @@ import * as path from "path";
 import * as url from "url";
 import { RootHandler } from "./storeHandlers/RootHandler";
 
-// NODE_ENV === undefined means we are running in the VS Code debugger
+// We want nodeEnv to contain either "production" or "development"
+// "development" means running in a local server with files loaded from project not from asar
 const nodeEnv = (process.env.NODE_ENV === undefined) ? "production" : process.env.NODE_ENV;
 
 // crashReporter.start();

@@ -6,9 +6,9 @@ import { StoreRoot } from "../../../shared/stores/StoreRoot";
 
 import * as styles from "./styles.scss";
 
-// NODE_ENV === undefined means we are running in the VS Code debugger
+// We want nodeEnv to contain either "production" or "development"
+// "development" means running in a local server with files loaded from project not from asar
 const nodeEnv = (process.env.NODE_ENV === undefined) ? "production" : process.env.NODE_ENV;
-
 
 //
 // NOTE: the WebView tag only accepts the file: protocol for the preload script
@@ -16,9 +16,9 @@ const nodeEnv = (process.env.NODE_ENV === undefined) ? "production" : process.en
 //
 const preloadScript = ((window as any).isInElectronRenderer === false)
                     ? ""
-                    : (nodeEnv === "production")
-                    ? `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/static/preload.js"}`
-                    : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "../../../../../../../../../../static/preload.js"}`;
+                    : (nodeEnv === "development")
+                    ? `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "../../../../../../../../../../static/preload.js"}`
+                    : `file://${(window as any).nodeRequire("electron").remote.app.getAppPath() + "/static/preload.js"}`;
 
 //
 // Note: you can set the WebView src attribute to ./index.html to just load the local bundled
