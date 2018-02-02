@@ -6,7 +6,9 @@ import { StoreRoot } from "../../../shared/stores/StoreRoot";
 
 import * as styles from "./styles.scss";
 
-const nodeEnv = process.env.NODE_ENV;
+// NODE_ENV === undefined means we are running in the VS Code debugger
+const nodeEnv = (process.env.NODE_ENV === undefined) ? "production" : process.env.NODE_ENV;
+
 
 //
 // NOTE: the WebView tag only accepts the file: protocol for the preload script

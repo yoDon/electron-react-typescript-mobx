@@ -4,7 +4,8 @@ var electron_1 = require("electron");
 var path = require("path");
 var url = require("url");
 var RootHandler_1 = require("./storeHandlers/RootHandler");
-var nodeEnv = process.env.NODE_ENV;
+// NODE_ENV === undefined means we are running in the VS Code debugger
+var nodeEnv = (process.env.NODE_ENV === undefined) ? "production" : process.env.NODE_ENV;
 // crashReporter.start();
 var storeRootHandler = new RootHandler_1.RootHandler();
 electron_1.app.on("window-all-closed", function () {
@@ -13,7 +14,7 @@ electron_1.app.on("window-all-closed", function () {
     }
 });
 electron_1.app.on("ready", function () {
-    if (nodeEnv !== "production") {
+    if (nodeEnv === "development") {
         var sourceMapSupport = require("source-map-support");
         sourceMapSupport.install();
     }
@@ -25,7 +26,7 @@ function createWindow() {
     // const { width, height } = screen.getPrimaryDisplay().workAreaSize;
     // const win = new BrowserWindow({ width, height });
     var win = new electron_1.BrowserWindow();
-    if (nodeEnv !== "production") {
+    if (nodeEnv === "development") {
         // delay 1000ms to wait for webpack-dev-server start
         setTimeout(function () {
             win.loadURL(url.format({

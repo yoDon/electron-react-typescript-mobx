@@ -3,7 +3,8 @@ import * as path from "path";
 import * as url from "url";
 import { RootHandler } from "./storeHandlers/RootHandler";
 
-const nodeEnv = process.env.NODE_ENV;
+// NODE_ENV === undefined means we are running in the VS Code debugger
+const nodeEnv = (process.env.NODE_ENV === undefined) ? "production" : process.env.NODE_ENV;
 
 // crashReporter.start();
 
@@ -16,7 +17,7 @@ app.on("window-all-closed", () => {
 });
 
 app.on("ready", () => {
-  if (nodeEnv !== "production") {
+  if (nodeEnv === "development") {
     const sourceMapSupport = require("source-map-support");
     sourceMapSupport.install();
   }
@@ -30,7 +31,7 @@ function createWindow() {
   // const win = new BrowserWindow({ width, height });
   const win = new BrowserWindow();
 
-  if (nodeEnv !== "production") {
+  if (nodeEnv === "development") {
     // delay 1000ms to wait for webpack-dev-server start
     setTimeout(() => {
       win.loadURL(url.format({
