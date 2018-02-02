@@ -31,7 +31,7 @@
   "build": {
     "appId": "com.example.electron-react-typescript-mobx",
     "productName": "Sample App",
-    "copyright": "Copyright © year ${author}",
+    "copyright": "Copyright © 2018 Accelerated Pictures, inc.",
     "forceCodeSigning": false,
     "directories": {
       "buildResources": "build",
