@@ -1,9 +1,8 @@
 :local {
   .backButton {
-      position: absolute;
-      top: 30%;
-      left: 20px;
-  }
+    margin-left: 20px;
+    margin-top: 5px;
+}
 
   .counter {
     position: absolute;
@@ -17,7 +16,7 @@
 
   .btnGroup {
     position: absolute;
-    top: 50%;
+    top: 10%;
     margin: 0 auto;
   }
 

@@ -71,20 +71,6 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
     }
     return (
       <div>
-        <ElectronWebView
-          src={electronWebViewSrc}
-          preload={preloadScript}
-          className={styles.webView}
-        />
-        <div style={{ margin:"15px" }}>
-          Counter: <b>{this.props.appState.counter.value}</b>
-        </div>
-        <div style={{ margin:"15px" }}>
-          You can also load the contained page (https://yodon.github.io/electron-react-typescript-mobx/sample)
-          in your browser where it does not have access to the Electron API. In that case the
-          contained code will use "local state" maintained in JS rather than "electron state"
-          maintained by the main process
-        </div>
         <div className={styles.backButton}>
           <Link to="/" style={{ marginRight:"60px" }}>
             <i className="fa fa-arrow-left fa-3x"/>
@@ -117,6 +103,20 @@ class HybridAppPage extends React.Component<{appState:StoreRoot}, {}> {
           >
             Minus
           </button>
+        </div>
+        <ElectronWebView
+          src={electronWebViewSrc}
+          preload={preloadScript}
+          className={styles.webView}
+        />
+        <div style={{ margin:"15px" }}>
+          Counter: <b>{this.props.appState.counter.value}</b>
+        </div>
+        <div style={{ margin:"15px" }}>
+          You can also load the contained page (https://yodon.github.io/electron-react-typescript-mobx/sample)
+          in your browser where it does not have access to the Electron API. In that case the
+          contained code will use "local state" maintained in JS rather than "electron state"
+          maintained by the main process
         </div>
       </div>
     );

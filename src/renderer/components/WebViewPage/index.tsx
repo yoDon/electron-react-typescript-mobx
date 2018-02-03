@@ -10,26 +10,26 @@ class WebViewPage extends React.Component {
     if ((window as any).isInElectronRenderer) {
       return (
         <div>
-          <ElectronWebView src="http://github.com" className={styles.webView} />
-            <div className={styles.backButton}>
-              <Link to="/" style={{ marginRight:"60px" }}>
-                <i className="fa fa-arrow-left fa-3x"/>
-              </Link>
-              <button
-                className="btn btn.main"
-                style={{ margin:"15px", backgroundColor:"coral" }}
-                onClick={this.openDevTools}
-              >
-                Open inner dev tools
-              </button>
-              <button
-                className="btn btn.main"
-                style={{ margin:"15px", backgroundColor:"coral" }}
-                onClick={this.innerBack}
-              >
-                Inner back back button
-              </button>
-            </div>
+          <div className={styles.backButton}>
+            <Link to="/" style={{ marginRight:"60px" }}>
+              <i className="fa fa-arrow-left fa-3x"/>
+            </Link>
+            <button
+              className="btn btn.main"
+              style={{ margin:"15px", backgroundColor:"coral" }}
+              onClick={this.openDevTools}
+            >
+              Open inner dev tools
+            </button>
+            <button
+              className="btn btn.main"
+              style={{ margin:"15px", backgroundColor:"coral" }}
+              onClick={this.innerBack}
+            >
+              Inner back back button
+            </button>
+          </div>
+          <ElectronWebView src="http://xkcd.com" className={styles.webView} />
         </div>
       );
     }
