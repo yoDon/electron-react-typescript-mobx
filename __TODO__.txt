@@ -1,23 +1,4 @@
-
-[ ] Figure out how to get Live Reload of main process via https://github.com/electron-userland/electron-compile
-[ ] Configure installers via https://github.com/electron-userland/electron-builder
-[ ] Configure auto-updater https://www.electron.build/auto-update
-
 [ ] update demo page in repo
 [ ] publish repo
 [ ] publish demo html
-
-
-[ ] Finish README
-    [ ] Explain directory structure
-        [ ] two separate html's, one for site one for electron, very similar
-        [ ] shared folder is for shared between renderer and site (don't currently share renderer&main or shared&main)
-    
-    [ ] scripts
-        [ ] pack-dev/pack-prod 
-            [ ] use typescript compiler to generate *.js files that can be loaded by electron into main process
-            [ ] call webpack twice to build as both website and electron app 
-        [ ] build 
-            [ ] is called by vs code debugger so keep it simple and fast = no installers (use dev and prod to do real builds that generate installers since installers are slow to compress)
-        [ ] NODE_ENV development means run in a local server environment, production means real electron build
 
