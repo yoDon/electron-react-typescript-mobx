@@ -1,4 +1,0 @@
-[ ] update demo page in repo
-[ ] publish repo
-[ ] publish demo html
-
