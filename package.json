@@ -56,7 +56,9 @@
     "mas": {},
     "dmg": {},
     "pkg": {},
-    "win": {},
+    "win": {
+      "target": "portable"
+    },
     "nsis": {},
     "nsisWeb": {},
     "portable": {},
