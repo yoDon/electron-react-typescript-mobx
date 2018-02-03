@@ -1,6 +1,19 @@
 # electron-react-typescript-mobx
 
-### Why use this boilerplate for Desktop Apps, Web Apps, and Hybrid Apps?
+<video width="480" height="320" controls="controls">
+<source src="/misc/output.mp4?raw=true" type="video/mp4">
+</video>
+
+## tl;dr:
+
+```bash
+$ git clone https://github.com/yoDon/electron-react-typescript-mobx.git
+$ cd electron-react-typescript-mobx
+$ npm install
+$ npm run start
+```
+
+## Why use this boilerplate for Desktop Apps, Web Apps, and Hybrid Apps?
 
 When I started building [Electron](http://electron.atom.io/) apps, there were some specific things I wanted that I couldn't find in any of the existing boilerplates.
 
