@@ -259,17 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-wwwroot/index.html
-wwwroot/bundle.js
-wwwsite/bundle.js
-wwwsite/index.html
-dist/site.js.map
-dist/site.js
-dist/index.html
-dist/electron.js.map
-dist/electron.js
-dist/electron.html
+
 dist/
+electron/
 package-lock.json
 yarn.lock
-electron/
